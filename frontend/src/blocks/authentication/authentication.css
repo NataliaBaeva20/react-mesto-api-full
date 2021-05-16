@@ -1,0 +1,11 @@
+.authentication {
+  width: 430px;
+  box-sizing: border-box;
+  margin: 60px auto 0;
+}
+
+@media screen and (max-width: 530px) {
+  .authentication {
+    width: 88.13vw;
+  }
+}

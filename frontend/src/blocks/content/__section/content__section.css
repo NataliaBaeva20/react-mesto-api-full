@@ -1,0 +1,14 @@
+.content__section {
+  width: 100%;
+  margin-bottom: 66px;
+}
+
+.content__section:last-child {
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 755px) {
+  .content__section {
+    margin-bottom: 36px;
+  }
+}

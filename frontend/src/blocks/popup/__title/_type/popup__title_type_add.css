@@ -1,0 +1,6 @@
+@media screen and (max-width: 530px) {
+  .popup__title_type_add {
+    width: calc(100% - 40px);
+    margin-bottom: 32px;
+  }
+}

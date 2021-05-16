@@ -1,0 +1,6 @@
+@media screen and (max-width: 530px) {
+  .form__input_type_add {
+    font-size: 12px;
+    line-height: 14px;
+  }
+}

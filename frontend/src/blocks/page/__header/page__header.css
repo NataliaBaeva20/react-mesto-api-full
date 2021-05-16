@@ -1,0 +1,24 @@
+.page__header {
+  width: 68.75%;
+  margin: 0 auto 24px;
+  padding-bottom: 41px;
+}
+@media screen and (max-width: 1024px) {
+  .page__header {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .page__header {
+    width: 88.125%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .page__header {
+    width: 100%;
+    padding-bottom: 31.6px;
+    margin-bottom: 42px;
+  }
+}

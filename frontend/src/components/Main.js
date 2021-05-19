@@ -32,7 +32,7 @@ function Main(props) {
                   cardId = {item._id}
                   link={item.link}
                   name={item.name}
-                  ownerId={item.owner._id}
+                  owner={item.owner}
                   likes = {item.likes}
                   likesCount={item.likes.length}
                   onCardClick={props.onCardClick}

@@ -56,7 +56,7 @@ function App() {
   }
 
   function handleUpdateUser({name, about}) {
-    api.setUserInfo({name, about})
+    api.setUserInfo({name, about}, localStorage.getItem('jwt'))
       .then((data) => {
         setCurrentUser(data);
         closeAllPopups();
@@ -67,7 +67,7 @@ function App() {
   }
 
   function handleUpdateAvatar({avatar}) {
-    api.setUserAvatar(avatar).then((data) => {
+    api.setUserAvatar(avatar, localStorage.getItem('jwt')).then((data) => {
       setCurrentUser(data);
       closeAllPopups();
       })
@@ -77,7 +77,7 @@ function App() {
   }
 
   function handleAddPlaceSubmit({name, link}) {
-    api.postCard({name, link})
+    api.postCard({name, link}, localStorage.getItem('jwt'))
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
@@ -89,10 +89,10 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeLikeCardStatus(card.cardId, !isLiked).then((newCard) => {
+    api.changeLikeCardStatus(card.cardId, !isLiked, localStorage.getItem('jwt')).then((newCard) => {
       setCards((state) => state.map((c) => c._id === card.cardId ? newCard : c));
     })
       .catch((err) => {
@@ -101,7 +101,7 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    api.deleteCard(card.cardId).then(() => {
+    api.deleteCard(card.cardId, localStorage.getItem('jwt')).then(() => {
       setCards((state) => state.filter((c) => c._id === card.cardId ? '' : c));
     })
     .catch((err) => {
@@ -152,7 +152,7 @@ function App() {
       if (jwt) {
         auth.getContent(jwt).then((res) => {
           if (res) {
-            setEmail(res.data.email);
+            setEmail(res.email);
             setLoggedIn(true);
             history.push('/');
           }
@@ -164,28 +164,32 @@ function App() {
   }
 
   React.useEffect(() => {
-      tokenCheck();
+    tokenCheck();
   }, []);
 
   React.useEffect(() => {
-    api.getInitialCards()
+    if (loggedIn) {
+      api.getInitialCards(localStorage.getItem('jwt'))
       .then((data) => {
         setCards(data);
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       });
-  }, []);
+    }
+  }, [loggedIn]);
 
   React.useEffect(() => {
-    api.getUserInfo()
+    if (loggedIn) {
+      api.getUserInfo(localStorage.getItem('jwt'))
       .then((data) => {
         setCurrentUser(data);
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       });
-  }, []);
+    }
+  }, [loggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

@@ -24,8 +24,7 @@
 <br />
 <hr>
 
-
+### Ссылки на готовый проект
 *[Ссылка на клиентскую часть](https://mesto.domainname.students.nomoredomains.monster)*
 
 *[Ссылка на серверную часть](https://api.mesto.domainname.nomoredomains.monster)*
-

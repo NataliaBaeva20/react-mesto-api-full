@@ -15,7 +15,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy": "npm run build && scp -r ./build/* n-v-baeva@178.154.254.10:/home/n-v-baeva/mesto-frontend",
+    "deploy": "npm run build && scp -r ./build/* n-v-baeva@84.201.128.34:/home/n-v-baeva/mesto-frontend",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
